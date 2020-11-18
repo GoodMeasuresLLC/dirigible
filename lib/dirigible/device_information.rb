@@ -7,8 +7,8 @@ class Dirigible::DeviceInformation
   #   Dirigible::DeviceInformation.get_device_token('FE66489F304DC75B8D6E8200DFF8A456E8DAEACEC428B427E9518741C92C6660')
   #
   # @see http://docs.urbanairship.com/reference/api/v3/device_information.html#individual-device-lookup
-  def self.get_device_token(id)
-    Dirigible.get("/device_tokens/#{id}")
+  def self.get_device_token(id, options)
+    Dirigible.get("/device_tokens/#{id}", options)
   end
 
   # Get information on a particular Android APID.
@@ -17,8 +17,8 @@ class Dirigible::DeviceInformation
   #   Dirigible::DeviceInformation.get_apid('11111111-1111-1111-1111-111111111111')
   #
   # @see http://docs.urbanairship.com/reference/api/v3/device_information.html#individual-device-lookup
-  def self.get_apid(id)
-    Dirigible.get("/apids/#{id}")
+  def self.get_apid(id, options)
+    Dirigible.get("/apids/#{id}", options)
   end
 
   # Get information on a particular BlackBerry PIN.
@@ -27,8 +27,8 @@ class Dirigible::DeviceInformation
   #   Dirigible::DeviceInformation.get_device_pin('12345678')
   #
   # @see http://docs.urbanairship.com/reference/api/v3/device_information.html#individual-device-lookup
-  def self.get_device_pin(id)
-    Dirigible.get("/device_pins/#{id}")
+  def self.get_device_pin(id, options)
+    Dirigible.get("/device_pins/#{id}", options)
   end
 
   # Count iOS device tokens registered to this application
@@ -38,8 +38,8 @@ class Dirigible::DeviceInformation
   #   Dirigible::DeviceInformation.count_device_tokens[:active_device_tokens_count]
   #
   # @see http://docs.urbanairship.com/reference/api/v3/device_information.html#device-listing
-  def self.count_device_tokens
-    Dirigible.get("/device_tokens/count")
+  def self.count_device_tokens(options={})
+    Dirigible.get("/device_tokens/count", options)
   end
 
 
@@ -95,19 +95,19 @@ class Dirigible::DeviceInformation
   #   Dirigible::DeviceInformation.device_token_feedback('2009-06-15')
   #
   # @see http://docs.urbanairship.com/reference/api/v3/device_information.html#feedback
-  def self.device_token_feedback(since)
-    Dirigible.get("/device_tokens/feedback", { since: since })
+  def self.device_token_feedback(since, options)
+    Dirigible.get("/device_tokens/feedback", options.merge({ since: since }))
   end
-  
+
   class List
     def initialize(response)
       @response = response
     end
-    
+
     def [](value)
       @response[value]
     end
-    
+
     # Fetch the next page for this device listing. Returns
     # nil if next_page is nil.
     def next_page(params = {})

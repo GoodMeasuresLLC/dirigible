@@ -29,7 +29,7 @@ module Dirigible
 
   def self.method_missing(method, *args, &block)
     return super unless api.respond_to?(method)
-    api.send(method, *args, &block)
+    api(args.second.slice(:app_key, :master_secret)).send(method, *args, &block)
   end
 
   def self.respond_to?(method)

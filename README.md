@@ -67,10 +67,17 @@ Change the HTTP library used for making requests to Urban Airship. Since we use 
 Dirigible.configure do |config|
 
   ...
-  
+
   config.http_adapter = :excon
 end
 ```
+
+## Per-request configuration
+
+Per request configuration is supported passing in options.
+Or I hope it is ;)
+
+Otherwise, we're talking TLS.
 
 ## Supported Endpoints
 
